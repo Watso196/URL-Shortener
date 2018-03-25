@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>URL Shortener!</title>
+  <link type="text/css" rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- begin container -->
+  <div id="container">
+
+    <p>
+      Shorten or lengthen a URL using one of the forms below.
+    </p>
+
+    <!-- shorten a long URL form -->
+    <form id="long-url">
+
+      <label for="long-input">Insert long URL</label>
+      <input id="long-input" name="long-input" type="text" />
+      <button type="submit">Get your short URL!</button>
+
+    </form>
+
+    <!-- lengthen a short URL form -->
+    <form id="short-url">
+
+      <label for="short-input">Insert short URL</label>
+      <input id="short-input" name="short-input" type="text" />
+      <button type="submit">Get your long URL!</button>
+
+    </form>
+
+  </div>
+
+  <script src="url-shortener.js"></script>
+
+</body>
+
+</html>
