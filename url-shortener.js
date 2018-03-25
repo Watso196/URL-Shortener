@@ -102,7 +102,6 @@ function createLongUrl () {
           //Create a response on the page by grabbing the id property
           createResponse("The lengthened URL:<br />" + json.longUrl);
         } else {
-          console.log(json);
           createResponse("There was an error: " + json.error.code + " " +
           json.error.message);
         }
