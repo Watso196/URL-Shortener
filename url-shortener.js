@@ -18,7 +18,7 @@ document.addEventListener("click", function (e) {
       createShortUrl();
     //If blank show error message
     } else {
-      createResponse("You haven't entered a long URL. Enter a long URL to create a short one.");
+      createMessage("You haven't entered a long URL. Enter a long URL to create a short one.");
     }
   } else if (e.target == expandButton) {
     //Check that input value is not blank
@@ -26,14 +26,14 @@ document.addEventListener("click", function (e) {
       expandUrl();
     //If blank show error message
     } else {
-      createResponse("You haven't entered a short URL. Enter a short URL to expand it.");
+      createMessage("You haven't entered a short URL. Enter a short URL to expand it.");
     }
   }
 });
 
 
 //Function to create a paragraph to append to the document
-function createResponse (message) {
+function createMessage (message) {
   //If a message is currently on screen, remove it
   if (document.querySelector("span")) {
     var span = document.querySelector("span");
@@ -67,7 +67,7 @@ function createShortUrl () {
           //Parse json data returned by application
           var json = JSON.parse(shortReq.responseText);
           //Create a response on the page by grabbing the id property
-          createResponse("Your new short URL:<br />" + json.id);
+          createMessage("Your new short URL:<br />" + json.id);
       }
   };
   //Stringify the data so it can be passed as JSON
@@ -99,9 +99,9 @@ function expandUrl () {
 
         if (expandReq.status === 200) {
           //Create a response on the page by grabbing the id property
-          createResponse("The expanded URL:<br />" + json.longUrl);
+          createMessage("The expanded URL:<br />" + json.longUrl);
         } else {
-          createResponse("There was an error: " + json.error.code + " " +
+          createMessage("There was an error: " + json.error.code + " " +
           json.error.message);
         }
 
