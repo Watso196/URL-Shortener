@@ -4,7 +4,7 @@ var longUrlInput = document.querySelector("#long-input");
 
 //Grab button variables for tracking button presses
 var shortenButton = document.querySelector("#long-url button");
-var lengthenButton = document.querySelector("#short-url button");
+var expandButton = document.querySelector("#short-url button");
 
 
 //User presses submit button
@@ -20,13 +20,13 @@ document.addEventListener("click", function (e) {
     } else {
       createResponse("You haven't entered a long URL. Enter a long URL to create a short one.");
     }
-  } else if (e.target == lengthenButton) {
+  } else if (e.target == expandButton) {
     //Check that input value is not blank
     if (shortUrlInput.value != "") {
-      createLongUrl();
+      expandUrl();
     //If blank show error message
     } else {
-      createResponse("You haven't entered a short URL. Enter a short URL to reveal the long one.");
+      createResponse("You haven't entered a short URL. Enter a short URL to expand it.");
     }
   }
 });
@@ -77,30 +77,29 @@ function createShortUrl () {
 }
 
 
-function createLongUrl () {
+function expandUrl () {
   //Create XML HTTP request
-  var longReq = new XMLHttpRequest();
+  var expandReq = new XMLHttpRequest();
   //Set URL for request and include API key
   var url = "https://www.googleapis.com/urlshortener/v1/"
   + "url?key=AIzaSyBMRkeU0d9r8N42_El2L91CwNCfq-0vDyM"
-  //add ShortUrl to GET request
+  //add shortUrl to GET request
   + "&shortUrl=" + shortUrlInput.value; //grab input value
   //Open our request - GET this time
-  longReq.open("GET", url, true);
+  expandReq.open("GET", url, true);
   //Set a header for the request with our content type as JSON
-  //Does a GET request need a request header?
-  longReq.setRequestHeader("Content-type", "text/plain");
+  expandReq.setRequestHeader("Content-type", "text/plain");
   //Create the callback function when the response is ready
-  longReq.onreadystatechange = function () {
+  expandReq.onreadystatechange = function () {
       //Parse json data returned by application
-      var json = JSON.parse(longReq.responseText);
+      var json = JSON.parse(expandReq.responseText);
 
       //If request response is ready and status is clear
-      if (longReq.readyState === 4) {
+      if (expandReq.readyState === 4) {
 
-        if (longReq.status === 200) {
+        if (expandReq.status === 200) {
           //Create a response on the page by grabbing the id property
-          createResponse("The lengthened URL:<br />" + json.longUrl);
+          createResponse("The expanded URL:<br />" + json.longUrl);
         } else {
           createResponse("There was an error: " + json.error.code + " " +
           json.error.message);
@@ -109,5 +108,5 @@ function createLongUrl () {
       }
   };
   //Send XML HTTP request
-  longReq.send();
+  expandReq.send();
 }
